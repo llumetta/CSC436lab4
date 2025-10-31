@@ -44,6 +44,7 @@ class TimerViewModel : ViewModel() {
       // Convert hours, minutes, and seconds to milliseconds
       totalMillis = (selectedHour * 60 * 60 + selectedMinute * 60 + selectedSecond) * 1000L
 
+      // Start coroutine that makes the timer count down
       if (totalMillis > 0) {
          isRunning = true
          remainingMillis = totalMillis
@@ -65,10 +66,10 @@ class TimerViewModel : ViewModel() {
          isRunning = false
          remainingMillis = 0
       }
-      fun onCleared() {
-         super.onCleared()
-         timerJob?.cancel()
-      }
+   }
 
+   override fun onCleared() {
+      super.onCleared()
+      timerJob?.cancel()
    }
 }
